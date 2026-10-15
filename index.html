@@ -1084,8 +1084,8 @@ details.gitbox[open]>summary{border-bottom:2px solid var(--line)}
   <p class="why">This makes your module part of the main program. Do it in <code>HMS.sln</code>, with your module folder already copied in (Git setup, part G).</p>
   <div class="cols">
     <ol class="todo">
-      <li><span>Open <code>HMS.sln</code>. In <b>Solution Explorer</b>, right-click <b>Solution 'HMS'</b> at the top. Click <span class="ui">Add</span>, then <span class="ui">Existing Project…</span>, and pick your <code>HMS.Module02.csproj</code>.</span></li>
-      <li><span>Right-click your project, then <span class="ui">Properties</span>. Set <b>Output type</b> to <b>Class Library</b>. Set <b>Assembly name</b> to your folder name, for example <code>HMS.Module02</code>.</span></li>
+      <li><span>Open <code>HMS.sln</code>. In <b>Solution Explorer</b>, find your project, for example <b>HMS.Module02</b>. It is already in the list. Once your folder and file names are right (Git setup, part G), it no longer says <b>(unavailable)</b>.</span></li>
+      <li><span>Right-click your project, then <span class="ui">Properties</span>. Set <b>Output type</b> to <b>Class Library</b>. Set <b>Target framework</b> to <b>.NET 8.0</b> (.NET 6.0 is fine too, but not 9 or 10). Set <b>Assembly name</b> to your folder name, for example <code>HMS.Module02</code>.</span></li>
       <li><span>In your project, right-click <code>Program.cs</code> and click <span class="ui">Delete</span>. The main program does this job now.</span></li>
       <li><span>Right-click your project. Click <span class="ui">Add</span>, then <span class="ui">Project Reference…</span>. Tick <b>HMS.Data</b> and click <span class="ui">OK</span>.</span></li>
       <li><span>Right-click your project. Click <span class="ui">Add</span>, then <span class="ui">Class…</span>. Name it <code>HmsModule.cs</code>. Delete everything in it and paste the line below. Change the number and the form name to yours.</span></li>
@@ -1121,6 +1121,9 @@ details.gitbox[open]>summary{border-bottom:2px solid var(--line)}
       <li><b>"The type 'Db' exists in both…":</b> your project still has its own <code>Db.cs</code>. Delete it; HMS.Data has the shared one.</li>
       <li><b>You installed SqlClient or MySql.Data before:</b> remove them in <span class="ui">Manage NuGet Packages…</span>, <span class="ui">Installed</span> tab. HMS.Data brings the right one.</li>
       <li><b>Your project says <code>net48</code> or ".NET Framework":</b> it cannot join this way. Ask the team lead.</li>
+      <li><b>Your project still says "(unavailable)":</b> the folder or the <code>.csproj</code> file is not named exactly <code>HMS.Module02</code> (your number). Close Visual Studio, fix the names in File Explorer, and open <code>HMS.sln</code> again.</li>
+      <li><b>Build error "is not compatible with net8.0-windows":</b> your project uses .NET 9 or 10. Set <b>Target framework</b> to <b>.NET 8.0</b> (part 2).</li>
+      <li><b>Do not use <span class="ui">Add</span>, <span class="ui">Existing Project…</span>:</b> your project is already in the list, and it would appear twice.</li>
     </ul></div>
   </details>
   <div class="step-foot">
@@ -1348,7 +1351,7 @@ catch (MySqlException ex)
     <li><span class="d">Wed 14 Oct, 11:59 PM</span><span><b>Your module is on GitHub</b> on your own branch, with a draft pull request. Every module, no exceptions.</span></li>
     <li><span class="d">Until Thu 15 Oct</span><span><b>Push your module exactly as it is.</b> Do not convert it to the database yet. The review needs your original version.</span></li>
     <li><span class="d">Thu 15 Oct</span><span><b>Read your review notes</b> on your pull request and reply the same day.</span></li>
-    <li><span class="d">Sat 17 Oct, 6:00 PM</span><span><b>Your module is connected</b> and your pull request is marked "Ready for review". Its name in the main menu opens your form.</span></li>
+    <li><span class="d">Sat 17 Oct, 12:00 noon</span><span><b>Your module is connected</b> and your pull request is marked "Ready for review". Its name in the main menu opens your form.</span></li>
     <li><span class="d">Mon 19 Oct</span><span><b>Initial review:</b> all 12 modules open from the main menu and the full patient chain works.</span></li>
     <li><span class="d">Thu 22 Oct</span><span><b>All review feedback is fixed.</b></span></li>
     <li><span class="d">Fri 23 Oct</span><span><b>Code freeze.</b> Your README and screenshots are in. After this, only fixes that stop the demo from running.</span></li>
@@ -1402,7 +1405,7 @@ catch (MySqlException ex)
       <div class="ph-head"><h3>2. Review against the database</h3><span class="dates">Wed 14 – Thu 15 Oct</span></div>
       <ul>
         <li><span class="who lead">Lead</span>Check every module against the shared database and its MP sheet: missing fields, different status names, WPF or .NET Framework projects.</li>
-        <li><span class="who lead">Lead</span>Update the database files once if needed, and personalize the sample names. Then announce: "database is final".</li>
+        <li><span class="who lead">Lead</span>Update the database files once. Then announce: "database is final".</li>
         <li><span class="who team">Everyone</span>Read your module's review notes on your pull request.</li>
       </ul>
       <p class="donewhen"><b>Done when:</b> final <code>schema.sql</code> and <code>seed.sql</code> are on <code>main</code>.</p>
@@ -1412,7 +1415,7 @@ catch (MySqlException ex)
       <div class="ph-head"><h3>3. Connect each module</h3><span class="dates">Thu 15 – Sat 17 Oct</span></div>
       <ul>
         <li><span class="who team">Everyone</span>Install XAMPP and import the database (guide steps 2 to 6).</li>
-        <li><span class="who team">Everyone</span>Connect your module and switch its save and load code to the database (steps 7 to 9). Mark your pull request "Ready for review" by <b>Sat 17 Oct, 6:00 PM</b>.</li>
+        <li><span class="who team">Everyone</span>Connect your module and switch its save and load code to the database (steps 7 to 9). Mark your pull request "Ready for review" by <b>Sat 17 Oct, 12:00 noon</b>.</li>
         <li><span class="who lead">Lead</span>Merge each module the same day its pull request is ready. Each one turns its name on in the main menu.</li>
       </ul>
       <p class="donewhen"><b>Done when:</b> your module's name in the main menu opens your form, with the shared data.</p>
@@ -1629,17 +1632,17 @@ catch (MySqlException ex)
       title:'Review day. Read your notes today',
       items:['Open your draft pull request on GitHub and read the team lead\'s review notes.',
              'Reply today. If the notes ask for a fix, make it on your branch, then commit and push (part H, steps 1 to 4).',
-             'Wait for the team lead\'s message: <b>"the database is final"</b>. It is planned for today.',
-             'As soon as it arrives, start <b>Steps 1 to 9</b> of this guide. Deadline: <b>Sat 17 Oct, 6:00 PM</b>.'],
+             'The team lead\'s message <b>"the database is final"</b> comes today. Your own change list is posted on your pull request.',
+             'Then start <b>Steps 1 to 9</b> of this guide, with your change list next to it. Deadline: <b>Sat 17 Oct, 12:00 noon</b>.'],
       notes:['XAMPP not installed yet? Do <b>First time only: install XAMPP</b> (X1 to X5) now, while you wait.'] },
     { from:'2026-10-16T00:00:00+08:00', tag:'Right now: Phase 3', rm:3,
-      title:'Connect your module. Deadline: Sat 17 Oct, 6:00 PM',
-      items:['Do <b>Steps 1 to 9</b> of this guide, in order. Step 1 brings the final database files into your branch.',
+      title:'Connect your module. Deadline: Sat 17 Oct, 12:00 noon',
+      items:['Do <b>Steps 1 to 9</b> of this guide, in order, with your own change list from your pull request next to it. Step 1 brings the final database files into your branch.',
              'Your module is done when its name in the main menu opens your form (Step 8) and your form loads the shared data (Step 9).',
              'Commit and push (part H, steps 1 to 4).',
              'On GitHub, open your pull request and click <b>Ready for review</b>.'],
       notes:['Stuck for more than an hour? Post in the team chat with the exact error message and a screenshot.'] },
-    { from:'2026-10-17T18:00:00+08:00', tag:'Right now: Phase 4', rm:4,
+    { from:'2026-10-17T12:00:00+08:00', tag:'Right now: Phase 4', rm:4,
       title:'Whole-chain test. Initial review: Mon 19 Oct',
       items:['The team lead runs one patient through every module: register, book, queue, consult, prescribe, dispense, lab, bill, pay.',
              'Stay reachable. If a handoff to or from your module breaks, fix it on your branch the same day and push.',
